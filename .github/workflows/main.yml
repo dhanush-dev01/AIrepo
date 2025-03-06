@@ -18,9 +18,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
-        run: npm run build  # Ensure this command works in package.json
-
   sonar_scan:
     runs-on: ubuntu-latest
     needs: build  # Ensure build runs before sonar_scan

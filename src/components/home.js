@@ -3,7 +3,10 @@ import React, { useState } from 'react';
 import './Home.css';
 
 const Home = () => {
-  const UnusedVar = "I am not used anywhere"; // ❌ Unused variable
+{
+      "original_code": "   const UnusedVar = \"I am not used anywhere\";",
+      "new_code": "",
+      "explanation": "Removed the unused variable to improve code quality and readability."
 
   const password = "12345"; // ❌ Hardcoded password (Security issue)
 

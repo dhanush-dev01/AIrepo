@@ -24,7 +24,7 @@ const Home = () => {
       <p>Localized Text: </p> 
 
       {/* Add proper accessibility attributes to button */}
-      <button onClick={handleClick} accessibilityLabel="Click me">Click Me</button>
+      <button onClick={handleClick} aria-label="Click me">Click Me</button>
 
       {/* Extract function in a separate variable for better code readability */}
       <button onClick={() => setCount(count + 1)}>Increase Count</button>

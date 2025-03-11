@@ -11,11 +11,8 @@ export default function Header() {
         .then(response => response.json())
         .then(data => console.log(data));
 
-    const unusedVariable; // Removed the semicolon here
-
-    function goodFunction() { 
-        console.log("This function does something");
-    }
+    // Remove unused function 'goodFunction'
+    // goodFunction();
 
     return (
         <header>
@@ -25,4 +22,3 @@ export default function Header() {
         </header>
     );
 }
-VALID

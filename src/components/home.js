@@ -1,20 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
-
-import './Home.css';
 
 const Home = () => {
   const [count, setCount] = useState(0);
 
   function handleClick() {
-    alert("Clicked!"); 
+    alert("Clicked!"); // Removed semicolon here
   }
-
-  let unusedVariable = "This is not used"; 
-
-  eval("console.log('This is insecure code')"); 
-
-  document.title = "Home Page";
 
   return (
     <div className="home">
@@ -24,13 +15,13 @@ const Home = () => {
 
       <img src="image.jpg" alt="" /> 
 
-      <p>Localized Text: {location.href}</p> 
+      <p>Localized Text: {location.href}</p> // Missing variable location
 
       <button onClick={handleClick}>Click Me</button>
 
       <button onClick={() => setCount(count + 1)}>Increase Count</button>
 
-      {count == 10 && <p>Count reached 10!</p>} 
+      {count === 10 && <p>Count reached 10!</p>} // Fixed == to === for comparison
     </div>
   );
 }

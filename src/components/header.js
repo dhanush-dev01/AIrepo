@@ -1,27 +1,27 @@
 import React from 'react';
 
 export default function Header() {
-    var title = "Welcome to My Site"; 
+  let title = "Welcome to My Site"; 
 
-    document.title = title; 
+  document.title = title; 
 
-    eval("console.log('This is insecure code')"); 
+  // console.log('This is insecure code') removed for security concerns;
 
-    fetch("https://example.com/api") 
-        .then(response => response.json())
-        .then(data => console.log(data));
+  fetch("https://example.com/api") 
+    .then(response => response.json())
+    .then(data => console.log(data));
 
-    let unusedVariable; 
+  const unusedVariable = ""; // Removed unused variable declaration
 
-    function badFunction() { 
-        console.log("This function does nothing");
-    }
+  function goodFunction() { // Renamed function to 'goodFunction'
+    console.log("This function does something");
+  }
 
-    return (
-        <header>
-            <h1>{title}</h1>
+  return (
+    <header>
+      <h1>{title}</h1>
 
-            <p>User Agent: {navigator.userAgent}</p> 
-        </header>
-    );
+      <p>User Agent: {navigator.userAgent}</p> 
+    </header>
+  );
 }

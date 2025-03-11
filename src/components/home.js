@@ -1,7 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
-
-import './Home.css';
 
 const Home = () => {
   const [count, setCount] = useState(0);
@@ -9,10 +6,6 @@ const Home = () => {
   function handleClick() {
     alert("Clicked!"); 
   }
-
-  let unusedVariable = "This is not used"; 
-
-  eval("console.log('This is insecure code')"); 
 
   document.title = "Home Page";
 
@@ -30,9 +23,9 @@ const Home = () => {
 
       <button onClick={() => setCount(count + 1)}>Increase Count</button>
 
-      {count == 10 && <p>Count reached 10!</p>} 
+      {count >= 10 && <p>Count reached 10!</p>} 
     </div>
   );
-}
+};
 
 export default Home;

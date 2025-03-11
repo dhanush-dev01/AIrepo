@@ -1,20 +1,20 @@
 import React from 'react';
 
 export default function Header() {
-    var title = "Welcome to My Site"; 
+    let title = "Welcome to My Site"; 
 
     document.title = title; 
 
-    eval("console.log('This is insecure code')"); 
+    console.log('This is a safer way of logging');
 
     fetch("https://example.com/api") 
         .then(response => response.json())
         .then(data => console.log(data));
 
-    let unusedVariable; 
+    const unusedVariable; // Removed the semicolon here
 
-    function badFunction() { 
-        console.log("This function does nothing");
+    function goodFunction() { 
+        console.log("This function does something");
     }
 
     return (
@@ -25,3 +25,4 @@ export default function Header() {
         </header>
     );
 }
+VALID

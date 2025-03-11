@@ -1,7 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
-
-import './Home.css';
 
 const Home = () => {
   const [count, setCount] = useState(0);
@@ -9,10 +6,6 @@ const Home = () => {
   function handleClick() {
     alert("Clicked!"); 
   }
-
-  let unusedVariable = "This is not used"; 
-
-  eval("console.log('This is insecure code')"); 
 
   document.title = "Home Page";
 
@@ -24,13 +17,13 @@ const Home = () => {
 
       <img src="image.jpg" alt="" /> 
 
-      <p>Localized Text: {location.href}</p> 
+      <p>Localized Text: {location.href}</p> // Error, 'location' is not defined
 
       <button onClick={handleClick}>Click Me</button>
 
       <button onClick={() => setCount(count + 1)}>Increase Count</button>
 
-      {count == 10 && <p>Count reached 10!</p>} 
+      {count >= 10 && <p>Count reached 10!</p>} // Error, '==' should be >= or <= for strict equality
     </div>
   );
 }

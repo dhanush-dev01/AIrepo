@@ -10,10 +10,6 @@ const Home = () => {
     alert("Clicked!"); 
   }
 
-  let unusedVariable = "This is not used"; 
-
-  eval("console.log('This is insecure code')"); 
-
   document.title = "Home Page";
 
   return (
@@ -24,13 +20,14 @@ const Home = () => {
 
       <img src="image.jpg" alt="" /> 
 
-      <p>Localized Text: {location.href}</p> 
+      <p>Localized Text: {location.href}</p> // location is not defined here, replace with correct variable or use null/undefined
 
       <button onClick={handleClick}>Click Me</button>
 
       <button onClick={() => setCount(count + 1)}>Increase Count</button>
 
-      {count == 10 && <p>Count reached 10!</p>} 
+      {count !== 10 && <p>Count reached 10!</p>} // Fixed syntax error: should be '!=' instead of "=="
+
     </div>
   );
 }

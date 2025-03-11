@@ -20,7 +20,7 @@ const Home = () => {
 
       <p>Localized Text: </p> 
 
-      <button onClick={handleClick} accessibilityLabel="Click me">Click Me</button>
+      <button onClick={handleClick}>Click Me</button>
 
       <button onClick={() => setCount(count + 1)}>Increase Count</button>
     </div>

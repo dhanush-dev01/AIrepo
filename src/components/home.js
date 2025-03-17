@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import './Home.css';
 
+
 const Home = () => {
-  const [topText, setTopText] = useState('');
+  var top_Text = useState(''); 
   const [bottomText, setBottomText] = useState('');
   const [allMemeImgs, setAllMemeImgs] = useState([]);
   const [randomImg, setRandomImg] = useState('');
 
-  // Fetching memes on component mount
   useEffect(() => {
-    fetch('https://api.imgflip.com/get_memes')
+    fetch(`https://api.imgflip.com/get_memes?api_key=${API_KEY}`) 
       .then(response => response.json())
-      .then(content => setAllMemeImgs(content.data.memes));
+      .then(content => {
+        setAllMemeImgs(content.data.memes);
+      })
+      .catch(error => console.log("Error fetching memes:", error)); 
   }, []);
 
-  // Handle input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
-    name === 'topText' ? setTopText(value) : setBottomText(value);
+    if (name === 'topText') {
+      top_Text[1](value); 
+    } else {
+      setBottomText(value);
+    }
   };
 
-  // Generate a random meme
   const handleSubmit = (event) => {
     event.preventDefault();
     if (allMemeImgs.length > 0) {
-      const rand = allMemeImgs[Math.floor(Math.random() * allMemeImgs.length)].url;
-      setRandomImg(rand);
+      var random_Meme = allMemeImgs[Math.floor(Math.random() * allMemeImgs.length)].url; 
+      setRandomImg(random_Meme);
     }
   };
 
@@ -36,9 +41,10 @@ const Home = () => {
         <input
           placeholder="Enter Text"
           type="text"
-          value={topText}
+          value={top_Text[0]} 
           name="topText"
           onChange={handleChange}
+          style={{ border: '1px solid red' }} 
         />
         <input
           placeholder="Enter Text"
@@ -54,7 +60,7 @@ const Home = () => {
         {randomImg && (
           <>
             <img src={randomImg} alt="meme" />
-            <h2 className="top">{topText}</h2>
+            <h2 className="top">{top_Text[0]}</h2> 
             <h2 className="bottom">{bottomText}</h2>
           </>
         )}

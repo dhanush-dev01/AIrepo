@@ -1,29 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import './Home.css';
 
 const Home = () => {
-  const [count, setCount] = useState(0);
+  const [topText, setTopText] = useState('');
+  const [bottomText, setBottomText] = useState('');
+  const [allMemeImgs, setAllMemeImgs] = useState([]);
+  const [randomImg, setRandomImg] = useState('');
 
-  function handleClick() {
-    alert("Clicked!"); 
-  }
+  // Fetching memes on component mount
+  useEffect(() => {
+    fetch('https://api.imgflip.com/get_memes')
+      .then(response => response.json())
+      .then(content => setAllMemeImgs(content.data.memes));
+  }, []);
 
-  document.title = "Home Page";
+  // Handle input changes
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    name === 'topText' ? setTopText(value) : setBottomText(value);
+  };
+
+  // Generate a random meme
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (allMemeImgs.length > 0) {
+      const rand = allMemeImgs[Math.floor(Math.random() * allMemeImgs.length)].url;
+      setRandomImg(rand);
+    }
+  };
 
   return (
-    <div className="home">
-      <h1>Home</h1>
-      
-      <p>Welcome to the Home page.</p>
-
-      <img src="image.jpg" alt="" /> 
-
-      <p>Localized Text: {location.href}</p> 
-
-      <button onClick={handleClick}>Click Me</button>
-
-      <button onClick={() => setCount(count + 1)}>Increase Count</button>
-
-      {count >= 10 && <p>Count reached 10!</p>} 
+    <div>
+      {/* Controlled form */}
+      <form className="meme-form" onSubmit={handleSubmit}>
+        <input
+          placeholder="Enter Text"
+          type="text"
+          value={topText}
+          name="topText"
+          onChange={handleChange}
+        />
+        <input
+          placeholder="Enter Text"
+          type="text"
+          value={bottomText}
+          name="bottomText"
+          onChange={handleChange}
+        />
+        <button>Generate</button>
+      </form>
+      <br />
+      <div className="meme">
+        {randomImg && (
+          <>
+            <img src={randomImg} alt="meme" />
+            <h2 className="top">{topText}</h2>
+            <h2 className="bottom">{bottomText}</h2>
+          </>
+        )}
+      </div>
     </div>
   );
 };

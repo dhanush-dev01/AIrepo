@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import './Header.css';
 
 export default function Header() {
-    let title = "Welcome to My Site"; 
+    const [title] = useState("Welcome to My Site");
+    const [apiData, setApiData] = useState(null);
+    const [error, setError] = useState(null);
 
-    document.title = title; 
+    useEffect(() => {
+        document.title = title;
+        
+        const fetchData = async () => {
+            try {
+                const response = await fetch("https://example.com/api");
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                const data = await response.json();
+                setApiData(data);
+            } catch (err) {
+                setError(err.message);
+            }
+        };
 
-    console.log('This is a safer way of logging');
-
-    fetch("https://example.com/api") 
-        .then(response => response.json())
-        .then(data => console.log(data));
-
-    // Remove unused function 'goodFunction'
-    // goodFunction();
+        fetchData();
+    }, [title]);
 
     return (
-        <header>
+        <header className="site-header">
             <h1>{title}</h1>
-
-            <p>User Agent: {navigator.userAgent}</p> 
+            {error && <div className="error-message">{error}</div>}
+            {apiData && <div className="api-data">{JSON.stringify(apiData)}</div>}
         </header>
     );
 }
